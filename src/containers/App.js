@@ -142,7 +142,7 @@ export default class App extends Component {
               rowSpan="2"
               id="enter"
             >
-              enter
+              =
             </td>
           </tr>
           <tr className={styles.row}>
