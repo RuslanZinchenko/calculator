@@ -19,7 +19,7 @@
     "react-transition-group": "^4.3.0",
     "shortid": "^2.2.15"
   },
-  "homepage": "https://ruslanzinchenko.github.io/testtask/",
+  "homepage": "https://ruslanzinchenko.github.io/calculator/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
