@@ -5,7 +5,7 @@
   box-sizing: border-box;
   list-style: none;
   text-decoration: none;
-  font-family: 'Gloria Hallelujah', cursive;
+  font-family: 'Roboto', sans-serif;
   font-weight: 400;
 }
 
@@ -46,7 +46,6 @@ td {
   margin-top: 10px;
   text-align: right;
   font-size: 35px;
-  font-weight: bold;
   font-family: 'Wallpoet', cursive;
   background-color: rgb(226, 226, 226);
   overflow: hidden;
@@ -57,7 +56,7 @@ td {
   height: 50px;
   border: 1px solid black;
   border-radius: 5px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
 }
@@ -65,4 +64,8 @@ td {
 .column:active {
   box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5),
     inset 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+span {
+  vertical-align: middle;
 }

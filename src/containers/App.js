@@ -8,16 +8,30 @@ export default class App extends Component {
     firstNumber: [],
     plus: false,
     minus: false,
+    multiply: false,
+    divide: false,
+    enter: false,
   };
 
   arr = [];
 
   handlePressAnyKey = e => {
     const { id } = e.target;
-    this.arr.push(id);
-    this.setState({
-      result: this.arr,
-    });
+    if (this.arr.length < 5) {
+      if (this.arr[0] === '0') {
+        this.arr = [];
+        this.setState({
+          result: 0,
+          enter: false,
+        });
+      } else {
+        this.arr.push(id);
+        this.setState({
+          result: this.arr,
+          enter: false,
+        });
+      }
+    }
   };
 
   handlePlus = () => {
@@ -36,32 +50,105 @@ export default class App extends Component {
     this.arr = [];
   };
 
+  handleMultiply = () => {
+    this.setState({
+      firstNumber: this.arr,
+      multiply: true,
+    });
+    this.arr = [];
+  };
+
+  handleDivide = () => {
+    this.setState({
+      firstNumber: this.arr,
+      divide: true,
+    });
+    this.arr = [];
+  };
+
+  handleClear = () => {
+    this.arr = [];
+    this.setState({
+      result: 0,
+      firstNumber: [],
+      plus: false,
+      minus: false,
+      multiply: false,
+      divide: false,
+      enter: false,
+    });
+  };
+
+  handleBackspace = () => {
+    const { enter } = this.state;
+    if (!enter && this.arr.length > 1) {
+      this.arr.pop();
+      this.setState({
+        result: this.arr,
+      });
+    } else if (!enter && this.arr.length === 1) {
+      this.arr = [];
+      this.setState({
+        result: 0,
+      });
+    }
+  };
+
   handleEnter = () => {
-    const { result, firstNumber, plus, minus } = this.state;
+    const { result, firstNumber, plus, minus, multiply, divide } = this.state;
     if (plus) {
       const plusFunction =
         Number(firstNumber.join('')) + Number(result.join(''));
       this.setState({
         result: plusFunction,
+        enter: true,
       });
     } else if (minus) {
       const minusFunction =
         Number(firstNumber.join('')) - Number(result.join(''));
       this.setState({
         result: minusFunction,
+        enter: true,
+      });
+    } else if (multiply) {
+      const multiplyFunction =
+        Number(firstNumber.join('')) * Number(result.join(''));
+      this.setState({
+        result: multiplyFunction,
+        enter: true,
+      });
+    } else if (divide) {
+      const divideFunction =
+        Number(firstNumber.join('')) / Number(result.join(''));
+      this.setState({
+        result: divideFunction,
+        enter: true,
       });
     }
   };
 
   render() {
     const { result } = this.state;
-    const resultLength = result.length > 5 ? result.slice(0, 5) : result;
 
     return (
       <div className={styles.wrapper}>
         <h3 className={styles.title}>Calculator</h3>
-        <div className={styles.display}>{resultLength}</div>
+        <div className={styles.display}>{result}</div>
         <table className={styles.table}>
+          <tr className={styles.row}>
+            <td className={styles.column} onClick={this.handlePlus}>
+              <span className="material-icons">add</span>
+            </td>
+            <td className={styles.column} onClick={this.handleMinus}>
+              <span className="material-icons">remove</span>
+            </td>
+            <td className={styles.column} onClick={this.handleMultiply}>
+              <span className="material-icons">clear</span>
+            </td>
+            <td className={styles.column} onClick={this.handleDivide}>
+              /
+            </td>
+          </tr>
           <tr className={styles.row}>
             <td
               className={styles.column}
@@ -84,8 +171,8 @@ export default class App extends Component {
             >
               9
             </td>
-            <td className={styles.column} onClick={this.handleMinus} id="-">
-              -
+            <td className={styles.column} onClick={this.handleBackspace}>
+              <span className="material-icons">keyboard_backspace</span>
             </td>
           </tr>
           <tr className={styles.row}>
@@ -110,8 +197,8 @@ export default class App extends Component {
             >
               6
             </td>
-            <td className={styles.column} onClick={this.handlePlus} id="+">
-              +
+            <td className={styles.column} onClick={this.handleClear}>
+              C
             </td>
           </tr>
           <tr className={styles.row}>
@@ -140,7 +227,6 @@ export default class App extends Component {
               className={styles.column}
               onClick={this.handleEnter}
               rowSpan="2"
-              id="enter"
             >
               =
             </td>
