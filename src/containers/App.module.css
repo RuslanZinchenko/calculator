@@ -25,9 +25,9 @@ td {
   width: 300px;
   border: 3px solid black;
   margin: 0 auto;
-  margin-top: 150px;
+  margin-top: 75px;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .table {
