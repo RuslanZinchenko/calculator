@@ -1,5 +1,5 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { Component } from 'react';
+import Table from '../components/Table/Table';
 import styles from './App.module.css';
 
 export default class App extends Component {
@@ -94,7 +94,7 @@ export default class App extends Component {
     }
   };
 
-  handleEnter = () => {
+  handleEqually = () => {
     const { result, firstNumber, plus, minus, multiply, divide } = this.state;
     if (plus) {
       const plusFunction =
@@ -131,117 +131,22 @@ export default class App extends Component {
     const { result } = this.state;
 
     return (
-      <div className={styles.wrapper}>
+      <div
+        style={{ marginTop: (window.visualViewport.height - 408) / 2 }}
+        className={styles.wrapper}
+      >
         <h3 className={styles.title}>Calculator</h3>
         <div className={styles.display}>{result}</div>
-        <table className={styles.table}>
-          <tr className={styles.row}>
-            <td className={styles.column} onClick={this.handlePlus}>
-              <span className="material-icons">add</span>
-            </td>
-            <td className={styles.column} onClick={this.handleMinus}>
-              <span className="material-icons">remove</span>
-            </td>
-            <td className={styles.column} onClick={this.handleMultiply}>
-              <span className="material-icons">clear</span>
-            </td>
-            <td className={styles.column} onClick={this.handleDivide}>
-              /
-            </td>
-          </tr>
-          <tr className={styles.row}>
-            <td
-              className={styles.column}
-              onClick={this.handlePressAnyKey}
-              id="7"
-            >
-              7
-            </td>
-            <td
-              className={styles.column}
-              onClick={this.handlePressAnyKey}
-              id="8"
-            >
-              8
-            </td>
-            <td
-              className={styles.column}
-              onClick={this.handlePressAnyKey}
-              id="9"
-            >
-              9
-            </td>
-            <td className={styles.column} onClick={this.handleBackspace}>
-              <span className="material-icons">keyboard_backspace</span>
-            </td>
-          </tr>
-          <tr className={styles.row}>
-            <td
-              className={styles.column}
-              onClick={this.handlePressAnyKey}
-              id="4"
-            >
-              4
-            </td>
-            <td
-              className={styles.column}
-              onClick={this.handlePressAnyKey}
-              id="5"
-            >
-              5
-            </td>
-            <td
-              className={styles.column}
-              onClick={this.handlePressAnyKey}
-              id="6"
-            >
-              6
-            </td>
-            <td className={styles.column} onClick={this.handleClear}>
-              C
-            </td>
-          </tr>
-          <tr className={styles.row}>
-            <td
-              className={styles.column}
-              onClick={this.handlePressAnyKey}
-              id="1"
-            >
-              1
-            </td>
-            <td
-              className={styles.column}
-              onClick={this.handlePressAnyKey}
-              id="2"
-            >
-              2
-            </td>
-            <td
-              className={styles.column}
-              onClick={this.handlePressAnyKey}
-              id="3"
-            >
-              3
-            </td>
-            <td
-              className={styles.column}
-              onClick={this.handleEnter}
-              rowSpan="2"
-            >
-              =
-            </td>
-          </tr>
-          <tr className={styles.row}>
-            <td
-              className={styles.column}
-              onClick={this.handlePressAnyKey}
-              colSpan="3"
-              id="0"
-            >
-              0
-            </td>
-          </tr>
-        </table>
+        <Table
+          onPressAnyKey={this.handlePressAnyKey}
+          onPlus={this.handlePlus}
+          onMinus={this.handleMinus}
+          onMultiply={this.handleMultiply}
+          onDivide={this.handleDivide}
+          onClear={this.handleClear}
+          onBackspace={this.handleBackspace}
+          onEqually={this.handleEqually}
+        />
       </div>
     );
   }
